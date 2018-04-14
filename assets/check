@@ -12,7 +12,7 @@ source /opt/resource/common.sh
 payload=$(mktemp $TMPDIR/request-payload.XXXXXX)
 cat > $payload <&0
 
-package=$(jq -r '.params.package // ""' < $payload)
+package=$(jq -r '.source.package // ""' < $payload)
 
 if [ -z "$package" ]; then
   echo "invalid payload (missing package)"
