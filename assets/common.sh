@@ -10,7 +10,9 @@ setup_aptkey() {
         exit 1
     fi
     
-    curl -sL "$key_url" | apt-key add -
+    for url in $key_url; do
+        curl -sL "$url" | apt-key add -
+    done
 }
 
 setup_apt() {
