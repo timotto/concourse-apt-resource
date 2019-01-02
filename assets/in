@@ -35,6 +35,7 @@ echo "Resource setup successful."
 apt-get -o Dir::Etc::sourcelist=/apt.list download ${package}=${version_string}
 read bytes filename < <(stat -c "%s %n" ${package}_${version_string}*.deb)
 read sha tmp < <(sha256sum "$filename")
+echo "$version_string" > version
 metadata="[{\"name\":\"size\",\"value\":\"$bytes\"},{\"name\":\"filename\",\"value\":\"$filename\"},{\"name\":\"sha256\",\"value\":\"$sha\"}]"
 echo "{\"version\":{\"version\":\"$version_string\"},\"metadata\":$metadata}" \
 | jq . \
